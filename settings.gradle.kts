@@ -19,11 +19,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://www.datanucleus.org/downloads/maven2/") }
+        //maven { url = uri("https://www.datanucleus.org/downloads/maven2/") }
 
     }
 }
 
 rootProject.name = "FTP Server"
 include(":app")
+include(":mylibrary")
+//project(":mylibrary").projectDir = File("mylibrary")
  

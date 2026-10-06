@@ -55,15 +55,15 @@ dependencies {
 
 
     // Following ADDED.
-    implementation(files("D:\\#Back\\PWSpace\\MyApplication\\mylibrary\\build\\outputs\\aar\\mylibrary-debug.aar"))
-
+    //implementation(files("D:\\#Back\\PWSpace\\MyApplication\\mylibrary\\build\\outputs\\aar\\mylibrary-debug.aar"))
+    implementation(project(":mylibrary"))
     implementation("org.apache.ftpserver:ftpserver-core:1.2.0")
     implementation("org.apache.mina:mina-core:2.2.1")
 
     implementation("androidx.preference:preference:1.2.1")
     implementation("org.apache.sshd:sshd-core:2.10.0")
     implementation("org.apache.sshd:sshd-sftp:2.10.0")
-    implementation("javax.management:jmx:1.2.1")
+    //implementation("javax.management:jmx:1.2.1")
     implementation("org.bouncycastle:bcprov-jdk18on:1.80")
     implementation("org.slf4j:slf4j-android:1.7.36")
 

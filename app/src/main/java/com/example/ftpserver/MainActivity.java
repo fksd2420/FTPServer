@@ -369,8 +369,8 @@ public class MainActivity extends AppCompatActivity {
 
             com.example.mylibrary.Settings.Load(SettingsFilePath);
 
-            sftpEnable_checkBox.setChecked(Settings.PreferencesStore.getBoolean("sftpEnable", false));
-            ftpEnable_checkBox.setChecked(Settings.PreferencesStore.getBoolean("ftpEnable", false));
+            sftpEnable_checkBox.setChecked(Settings.PreferencesStore.getBoolean("sftpEnable", true));
+            ftpEnable_checkBox.setChecked(Settings.PreferencesStore.getBoolean("ftpEnable", true));
             sftpPort_editText.setText(String.valueOf(Settings.PreferencesStore.getInt("SftpPort", 8022)));
             ftpPort_editText.setText(Settings.PreferencesStore.getString("FtpPort", "8021,8030-8039"));
             username_editText.setText(Settings.PreferencesStore.getString("Username", "admin"));
@@ -381,6 +381,12 @@ public class MainActivity extends AppCompatActivity {
 
 
             PopulateLocalLocations();
+
+            boolean sftpEnable = Settings.PreferencesStore.getBoolean("sftpEnable", true);
+            boolean ftpEnable = Settings.PreferencesStore.getBoolean("ftpEnable", true);
+
+            if (!sftpEnable && !ftpEnable)
+                serverEnable_switch.setEnabled(false);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -486,8 +492,17 @@ public class MainActivity extends AppCompatActivity {
 
         try {
 
-            StartSftpServer();
-            StartFtpServer();
+            boolean sftpEnable = Settings.PreferencesStore.getBoolean("sftpEnable", true);
+            boolean ftpEnable = Settings.PreferencesStore.getBoolean("ftpEnable", true);
+
+            if (!sftpEnable && !ftpEnable)
+                return;
+
+            if (sftpEnable)
+                StartSftpServer();
+            if (ftpEnable)
+                StartFtpServer();
+
             startMonitoring();
             runOnUiThread(new Runnable() {
                 @Override
@@ -503,8 +518,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             stopMonitoring();
-            StopSftpServer();
-            StopFtpServer();
+            if (sftpEnable)
+                StopSftpServer();
+            if (ftpEnable)
+                StopFtpServer();
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

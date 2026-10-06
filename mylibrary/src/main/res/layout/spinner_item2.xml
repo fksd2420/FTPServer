@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_gravity="left"
+        android:id="@+id/abcdef"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="abc"
+        android:textColor="@color/black"
+        android:gravity="left"
+        />
+</LinearLayout>

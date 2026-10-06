@@ -1,0 +1,175 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.mylibrary.SettingsFragment"
+    android:orientation="vertical"
+    android:background="#1E1E1E">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="horizontal">
+            <EditText
+                android:id="@+id/et_config"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="0dp"
+                android:padding="10dp"
+                android:gravity="top|left"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:background="@color/white"
+                android:fontFamily="monospace"
+                android:scrollHorizontally="true"/>
+        </HorizontalScrollView>
+<!--                android:scrollbars="vertical|horizontal"-->
+<!--                android:scrollHorizontally="true"-->
+        </ScrollView>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/settings_fileName_et"
+        android:gravity="top|left"
+        android:textSize="14sp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/button_reload"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Load" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"/>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+
+            <Button
+                android:id="@+id/btn_settings_save"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="0dp"
+                android:padding="0dp"
+
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/button_reload2"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Load"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/btn_importfile"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Import"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:insetTop="0dp"
+                android:layout_marginRight="20dp"
+                android:insetBottom="0dp"
+                android:layout_weight="1"
+                android:text="Delete"
+                />
+
+            <Button
+                android:id="@+id/showFiles_button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:insetTop="0dp"
+                android:layout_marginRight="20dp"
+                android:insetBottom="0dp"
+                android:layout_weight="1"
+                android:text="DIR" />
+
+            <Button
+                android:id="@+id/btn_exportfile"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Export"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Border color when the field is focused (active typing) -->
+    <item android:state_focused="true" android:color="#800080" /> <!-- Purple -->
+
+    <!-- Border color when the field is hovered over -->
+    <item android:state_hovered="true" android:color="#0000FF" /> <!-- Blue -->
+
+    <!-- Default border color when inactive -->
+    <item android:color="#A0A0A0" /> <!-- Grey -->
+
+</selector>
