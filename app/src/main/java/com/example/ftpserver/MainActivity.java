@@ -116,13 +116,21 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+
+
+
+
+
+
+
+
 public class MainActivity extends AppCompatActivity {
 
     String TITLE = "FTP Server";
     String SettingsFileName = "Settings.xml";
     String SettingsFilePath = "";
     String SSH_DIR = "/";
-
+    boolean DEBUG = false;
 
     SwitchCompat serverEnable_switch;
     CheckBox sftpEnable_checkBox;
@@ -171,28 +179,83 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
-                    PackageManager.PERMISSION_GRANTED) {
-                // Already granted, no action needed
-            } else {
-                // Directly request the permission
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED) {
+            // Already granted, no action needed
+        } else {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                // CASE 1: User denied once. Show custom rationale before asking again.
+                new AlertDialog().show(this, "Notifications", "Permission to post notifications" +
+                        " is required.", "OK", "Exit", null, new AlertDialog.Callback() {
+                    @Override
+                    public void onResult(int result) {
+                        if (result == AlertDialog.RESULT_NEUTRAL) {
+                            finish();
+                            return;
+                        }
+                        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                    }
+                });
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+
+            } else {
+                new AlertDialog().show(this, "Permission required", "You have permanently denied notification " +
+                                "permissions. Please enable them in the system settings to use this app.",
+                        "Goto settings", "Exit", null,
+                        new AlertDialog.Callback() {
+                            @Override
+                            public void onResult(int result) {
+
+                                if (result == AlertDialog.RESULT_POSITIVE) {
+                                    Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                    intent.setData(uri);
+//                                    startActivity(intent);
+
+
+                                    ActivityResultLauncher<Intent> settingsActivityResultLauncher = registerForActivityResult(
+                                            new ActivityResultContracts.StartActivityForResult(),
+                                            result_ -> {
+                                                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.POST_NOTIFICATIONS) ==
+                                                        PackageManager.PERMISSION_GRANTED == false) {
+                                                    finish();
+                                                }
+
+                                            }
+                                    );
+                                    settingsActivityResultLauncher.launch(intent);
+
+                                }
+
+                            }
+                        });
             }
+
         }
 
         if (Environment.isExternalStorageManager()) {
             // You have full storage access. Proceed with file operations.
         } else {
-            // Request the permission from the user.
-            Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            intent.addCategory("android.intent.category.DEFAULT");
-            String packagename=getPackageName();
-            intent.setData(Uri.parse(String.format("package:%s", packagename)));
-            intent.putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, getApplicationContext().getPackageName());
+            new AlertDialog().show(this, "Permission request", "Permission to access all files" +
+                    " is required", "OK", "Exit", null, new AlertDialog.Callback() {
+                @Override
+                public void onResult(int result) {
+                    if (result == AlertDialog.RESULT_NEUTRAL) {
+                        finish();
+                        return;
+                    }
 
-            startActivity(intent);
+                    // Request the permission from the user.
+                    Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                    intent.addCategory("android.intent.category.DEFAULT");
+                    String packagename=getPackageName();
+                    intent.setData(Uri.parse(String.format("package:%s", packagename)));
+                    intent.putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, getApplicationContext().getPackageName());
+
+                    allFilesAccessLauncher.launch(intent);
+                }
+            });
+
 
         }
 
@@ -263,6 +326,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        if (!DEBUG) {
+            actionBar.hideMoreButton();
+            Button settingsButton = (Button)actionBar.options.get(0);
+            settingsButton.setVisibility(View.GONE);
+        }
     }
     private void Init() {
 
@@ -797,8 +866,24 @@ public class MainActivity extends AppCompatActivity {
 
                 if (Environment.isExternalStorageManager() == false) {
                     new AlertDialog().show(MainActivity.this, "Error", "Permission is " +
-                            "required for this app to work.\nExitting.", "OK", null, null, null);
-                    finish();
+                            "required for this app to work.\nExitting.", null, null, null, null);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    finish();
+                                }
+                            });
+                        }
+                    }).start();
                 }
             }
     );
@@ -810,8 +895,25 @@ public class MainActivity extends AppCompatActivity {
                     //showToast("Notification permission granted!");
                 } else {
                     new AlertDialog().show(MainActivity.this, "Error", "Permission is " +
-                            "required for this app to work.\nExitting.", "OK", null, null, null);
-                    finish();
+                            "required for this app to work.\nExitting.", null, null, null, null);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    finish();
+                                }
+                            });
+                        }
+                    }).start();
+
                     // Permission denied. Inform the user they won't receive updates.
                     //showToast("Notification permission denied.");
                 }
