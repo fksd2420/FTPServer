@@ -29,9 +29,6 @@ jobs:
     - name: Grant Execute Permission for Gradlew
       run: chmod +x gradlew
 
-    # Step 4: Run Android Lint (Optional, helps catch code issues early)
-    #- name: Run Code Lint
-    #  run: ./gradlew lintDebug
 
     # Step 5: Compile the Debug APK
     - name: Build Debug APK
