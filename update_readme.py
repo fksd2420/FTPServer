@@ -13,7 +13,7 @@ if response.status_code == 200:
 
     json = response.json()
     for item in json:
-        print(item["tag_name"]
+        print(item["tag_name"])
         for asset in item["assets"]:
             if asset["name"].endswith(".apk"):
                 with open(f"downloads/{item['tag_name']}.txt", "w") as file:
