@@ -22,8 +22,8 @@ if response.status_code == 200:
     total_count = 0
     dir_path = Path("downloads")
     for item in dir_path.iterdir():
-    if item.is_file():
-        total_count += int(item.read_text())
+        if item.is_file():
+            total_count += int(item.read_text())
     message = "Download count: " + str(total_count)
 else:
     message = "Download count: NA"
