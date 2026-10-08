@@ -28,7 +28,7 @@ if response.status_code == 200:
 else:
     message = "Download count: NA"
     
-current_time = (datetime.datetime.now() + datetime.timedelta(hours=5)).strftime("%Y-%m-%d %H:%M:%S UTC")
+current_time = (datetime.datetime.now() + datetime.timedelta(hours=5)).strftime("%Y-%m-%d %I:%M %p")
 last_update =  f"### 🕒 Last Updated\nThis README was automatically updated on: {current_time}"
 
 with open("README.md", "r", encoding="utf-8") as file:
