@@ -44,15 +44,15 @@ end_idx = readme_content.find(end_marker)
 
 if start_idx == -1 or end_idx == -1:
     print("Error: Could not find section markers in README.md")
-    return
-
-# Extract sections before and after the dynamic area
-before_section = readme_content[:start_idx + len(start_marker)]
-after_section = readme_content[end_idx:]
-
-new_dynamic_content = message + "\n" + last_update
-
-updated_content = before_section + new_dynamic_content + after_section
-
-with open("README.md", "w", encoding="utf-8") as file:
-    file.write(updated_content)
+else:    
+    
+    # Extract sections before and after the dynamic area
+    before_section = readme_content[:start_idx + len(start_marker)]
+    after_section = readme_content[end_idx:]
+    
+    new_dynamic_content = message + "\n" + last_update
+    
+    updated_content = before_section + new_dynamic_content + after_section
+    
+    with open("README.md", "w", encoding="utf-8") as file:
+        file.write(updated_content)
