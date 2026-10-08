@@ -3,6 +3,9 @@ import requests
 from pathlib import Path
 
 
+dir_path = Path("downloads")
+dir_path.mkdir(parents=True, exist_ok=True)
+
 response = requests.get("https://api.github.com/repos/fksd2420/FTPServer/releases")
 message = ""
 if response.status_code == 200:
