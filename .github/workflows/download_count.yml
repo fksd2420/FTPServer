@@ -40,6 +40,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add README.md
-          # Only commit if there are actually changes to avoid workflow errors
-          git diff --staged --quiet || (git commit -m "📝 Auto-updated README [skip ci]" && git push)
+          git add .
+          # The 'git diff-index' check prevents the workflow from failing if there are no changes to commit
+          git diff-index --quiet HEAD || git commit -m "chore: automated file update"
+          git push
