@@ -4,8 +4,9 @@ Host SFTP / FTP server on your phone.
 <br/>
 <br/>
 [![Android CI Build](https://github.com/fksd2420/FTPServer/actions/workflows/android.yml/badge.svg)](https://github.com/fksd2420/FTPServer/actions)
-![Code Size](https://img.shields.io/github/code-size/fksd2420/FTPServer)
+<br/>
 ![Repo Size](https://img.shields.io/github/repo-size/fksd2420/FTPServer)
+![Code Size](https://img.shields.io/github/languages/code-size/fksd2420/FTPServer)
 <br/>
 <!-- START_SECTION:update_zone -->Download count: 1
 ### 🕒 Last Updated
