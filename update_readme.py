@@ -6,16 +6,17 @@ from pathlib import Path
 dir_path = Path("downloads")
 dir_path.mkdir(parents=True, exist_ok=True)
 
+
 response = requests.get("https://api.github.com/repos/fksd2420/FTPServer/releases")
 message = ""
 if response.status_code == 200:
 
     json = response.json()
-
-    for item : json:
-        for asset : item["assets"]:
+    for item in json:
+        print(item["tag_name"]
+        for asset in item["assets"]:
             if asset["name"].endswith(".apk"):
-                with open(f"downloads/{item.tag_name}.txt", "w") as file:
+                with open(f"downloads/{item['tag_name']}.txt", "w") as file:
                     file.write(asset["download_count"])
 
     total_count = 0
