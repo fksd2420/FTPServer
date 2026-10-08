@@ -1,0 +1,44 @@
+name: Auto Update README
+
+on:
+  # Trigger the workflow every day at midnight UTC
+  schedule:
+    - cron: '0 0 * * *'
+  # Allows you to manually trigger the workflow from the Actions tab anytime
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # Crucial permission required to let GitHub Actions commit changes back to your repo
+    permissions:
+      contents: write
+
+    steps:
+      # 1. Download repository files to the runner environment
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 3. (Optional) Install dependencies if your script needs external packages
+      # - name: Install Dependencies
+      #   run: |
+      #     pip install requests feedparser
+
+      # 4. Run the Python script to update the README
+      - name: Run Script
+        run: python update_readme.py
+
+      # 5. Commit and push the updated README.md back to the repository
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add README.md
+          # Only commit if there are actually changes to avoid workflow errors
+          git diff --staged --quiet || (git commit -m "📝 Auto-updated README [skip ci]" && git push)
