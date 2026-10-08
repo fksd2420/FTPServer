@@ -17,7 +17,7 @@ if response.status_code == 200:
         for asset in item["assets"]:
             if asset["name"].endswith(".apk"):
                 with open(f"downloads/{item['tag_name']}.txt", "w") as file:
-                    file.write(asset["download_count"])
+                    file.write(str(asset["download_count"]))
 
     total_count = 0
     dir_path = Path("downloads")
