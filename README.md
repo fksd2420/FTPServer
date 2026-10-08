@@ -6,6 +6,8 @@ Host SFTP / FTP server on your phone.
 [![Android CI Build](https://github.com/fksd2420/FTPServer/actions/workflows/android.yml/badge.svg)](https://github.com/fksd2420/FTPServer/actions)
 <br/>
 <!-- START_SECTION:update_zone -->
+### 🕒 Last Updated
+This README was automatically updated on: **2026-10-08 17:27:40 UTC**
 <!-- END_SECTION:update_zone -->
 <br/>
 <br/>
