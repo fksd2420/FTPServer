@@ -43,13 +43,13 @@ jobs:
         mv app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/com.fksd2420.ftpserver.apk
 
       # Bulk delete all existing releases
-    - name: Clear all previous releases
-      run: |
-        echo "Fetching and deleting all releases..."
-        gh release list --limit 1000 --json tagName --jq '.[].tagName' | while read -r tag; do
-          echo "Deleting release for tag: $tag"
-          gh release delete "$tag" --yes
-        done
+    # - name: Clear all previous releases
+    #   run: |
+    #     echo "Fetching and deleting all releases..."
+    #     gh release list --limit 1000 --json tagName --jq '.[].tagName' | while read -r tag; do
+    #       echo "Deleting release for tag: $tag"
+    #       gh release delete "$tag" --yes
+    #     done
         
     - name: Create GitHub Release and Upload APKs
       uses: softprops/action-gh-release@v2
