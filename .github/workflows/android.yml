@@ -33,6 +33,10 @@ jobs:
 
     - name: Rename APK with Tag
       run: |
+        ls app/build
+        ls app/build/outputs
+        ls app/build/outputs/apk
+        ls app/build/outputs/apk/release
         TAG_NAME=${GITHUB_REF#refs/tags/}
         mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/com.fksd2420.ftpserver.apk
 
