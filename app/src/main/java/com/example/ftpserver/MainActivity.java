@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     String SettingsFileName = "Settings.xml";
     String SettingsFilePath = "";
     String SSH_DIR = "/";
-    boolean DEBUG = false;
+    boolean DEBUG = true;
 
     SwitchCompat serverEnable_switch;
     CheckBox sftpEnable_checkBox;
@@ -392,6 +392,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         SSH_DIR = getDataDir().toString();
+
+
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(
+                new FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                        super.onFragmentDestroyed(fm, f);
+
+                        // Check if the exiting fragment is the target child
+                        if (f instanceof SettingsFragment) {
+                            // Execute your parent-side logic here
+                            actionBar.StopActionMode();
+                            LoadSettings();
+                        }
+                    }
+                },
+                false // Set to true to recursively monitor nested child fragments
+        );
     }
 
 
@@ -413,22 +431,6 @@ public class MainActivity extends AppCompatActivity {
 
         actionBar.StartActionMode();
 
-        getSupportFragmentManager().registerFragmentLifecycleCallbacks(
-                new FragmentManager.FragmentLifecycleCallbacks() {
-                    @Override
-                    public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
-                        super.onFragmentDestroyed(fm, f);
-
-                        // Check if the exiting fragment is the target child
-                        if (f instanceof SettingsFragment) {
-                            // Execute your parent-side logic here
-                            actionBar.StopActionMode();
-                            LoadSettings();
-                        }
-                    }
-                },
-                false // Set to true to recursively monitor nested child fragments
-        );
     }
     public void LoadSettings() {
         try {
@@ -498,7 +500,9 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                serverEnable_switch.setOnCheckedChangeListener(null);
                 serverEnable_switch.setChecked(ForegroundService.IsRunning);
+                serverEnable_switch.setOnCheckedChangeListener(MainActivity.this::serverEnable_switch_onCheckedChange);
             }
         });
 
@@ -648,9 +652,9 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             availableLocations_textView.setText(paths);
-            rootPath_editText.setText(locations.get(0));
-            symlinkLocation_editText.setText("");
-            symlinkTarget_editText.setText(locations.size() > 1 ? locations.get(1) : "/");
+            //rootPath_editText.setText(locations.get(0));
+            //symlinkLocation_editText.setText("");
+            //symlinkTarget_editText.setText(locations.size() > 1 ? locations.get(1) : "/");
         } catch (Exception e) {
             e.printStackTrace();
         }

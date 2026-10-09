@@ -25,6 +25,7 @@
                 android:layout_weight="1"
                 android:layout_margin="0dp"
                 android:padding="10dp"
+                android:inputType="textMultiLine"
                 android:gravity="top|left"
                 android:textColor="@color/black"
                 android:textSize="14sp"

@@ -77,7 +77,7 @@ public class ActionBar extends RelativeLayout {
                 if (Callbacks != null) Callbacks.onBack(view);
             }
         });
-        moreButton.setOnClickListener(this::moreButton_onClick);
+        //moreButton.setOnClickListener(this::moreButton_onClick);
     }
     public View getRootView() {
         return view;
@@ -157,37 +157,12 @@ public class ActionBar extends RelativeLayout {
         button.setBackground(UIHelper.createDrawableSelector(0x00000000, 0x50ffffff));
     }
     private void moreButton_onClick(View v) {
-        PopupMenu popup = new PopupMenu(context, v);
-        Menu menu = popup.getMenu();
-
-        // 2. Add items programmatically: add(groupId, itemId, order, title)
-        // Use Menu.NONE (0) for parameters you don't need to categorize
-        menu.add(Menu.NONE, 1, 1, "Edit");
-        menu.add(Menu.NONE, 2, 2, "Share");
-        menu.add(Menu.NONE, 3, 3, "Delete");
-
-        // 3. Handle item clicks using the unique itemId
-        popup.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 1:
-                    Toast.makeText(context, "Edit clicked", Toast.LENGTH_SHORT).show();
-                    return true;
-                case 2:
-                    Toast.makeText(context, "Share clicked", Toast.LENGTH_SHORT).show();
-                    return true;
-                case 3:
-                    Toast.makeText(context, "Delete clicked", Toast.LENGTH_SHORT).show();
-                    return true;
-                default:
-                    return false;
-            }
-        });
-
-        // 4. Show the popup
-        popup.show();
 
     }
 
+    public ImageButton getMoreButton() {
+        return moreButton;
+    }
     public void showMoreButton() {
         view.findViewById(R.id.actionbar_more).setVisibility(View.VISIBLE);
     }

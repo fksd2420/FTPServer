@@ -70,5 +70,8 @@ dependencies {
 //    implementation("net.i2p.crypto:eddsa:0.3.0")
 
 
+}
 
+configurations.configureEach {
+    exclude(group = "com.google.testing.platform")
 }
