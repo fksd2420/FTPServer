@@ -3,7 +3,7 @@ name: Auto Update README
 on:
   # Trigger the workflow every day at midnight UTC
   schedule:
-    - cron: '0 20 * * *'
+    - cron: '0 22 * * *'
   # Allows you to manually trigger the workflow from the Actions tab anytime
   workflow_dispatch: 
 
