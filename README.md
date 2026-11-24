@@ -8,9 +8,9 @@ Host SFTP / FTP server on your phone.
 ![Repo Size](https://img.shields.io/github/repo-size/fksd2420/FTPServer)
 ![Code Size](https://img.shields.io/github/languages/code-size/fksd2420/FTPServer)
 <br/>
-<!-- START_SECTION:update_zone -->Download count: NA
+<!-- START_SECTION:update_zone -->Download count: 1
 ### 🕒 Last Updated
-This README was automatically updated on: 2026-11-23 04:58 AM<!-- END_SECTION:update_zone -->
+This README was automatically updated on: 2026-11-24 09:10 AM<!-- END_SECTION:update_zone -->
 <br/>
 <br/>
 
